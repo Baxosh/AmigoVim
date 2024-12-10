@@ -2,5 +2,5 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 
--- vim.g.format_on_save = true
--- vim.cmd([[autocmd BufWritePre *.py lua vim.lsp.buf.format()]])
+vim.g.format_on_save = true
+vim.cmd([[autocmd BufWritePre *.py lua vim.lsp.buf.format()]])
