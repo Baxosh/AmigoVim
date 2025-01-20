@@ -1,4 +1,11 @@
 return {
+  -- darcula
+  {
+    "doums/darcula",
+    config = function()
+      vim.cmd("colorscheme darcula")
+    end,
+  },
   -- add gruvbox
   { "ellisonleao/gruvbox.nvim" },
 
@@ -6,7 +13,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "tokyonight-night",
+      colorscheme = "gruvbox",
     },
   },
 }
