@@ -1,20 +1,18 @@
 return {
+  -- github colorscheme
+  { "projekt0n/github-nvim-theme", name = "github-theme" },
+
   -- add gruvbox
   { "ellisonleao/gruvbox.nvim" },
+
+  -- darcula
+  { "doums/darcula" },
 
   -- Configure LazyVim to load gruvbox
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "gruvbox",
+      colorscheme = "github_dark_default",
     },
   },
-
-  -- darcula
-  -- {
-  --   "doums/darcula",
-  --   config = function()
-  --     vim.cmd("colorscheme darcula")
-  --   end,
-  -- },
 }

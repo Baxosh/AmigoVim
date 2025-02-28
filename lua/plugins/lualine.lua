@@ -30,7 +30,7 @@ return {
           {
             "branch",
             separator = { left = "" },
-            color = { bg = "#414547", fg = "#b5cadb" },
+            -- color = { bg = "#09202f", fg = "#2d8ad7" },
             right_padding = 2,
           },
         },

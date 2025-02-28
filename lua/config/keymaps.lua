@@ -9,3 +9,5 @@ end, { desc = "Close All Buffers" })
 -- Center horizontally: scroll the current line to the center horizontally
 vim.keymap.set("n", "zh", "zH", { desc = "Scroll right to center horizontally" })
 vim.keymap.set("n", "zl", "zL", { desc = "Scroll left to center horizontally" })
+
+vim.keymap.set("x", "p", [["_dP]], { desc = "Paste without yanking replaced text", silent = true })
