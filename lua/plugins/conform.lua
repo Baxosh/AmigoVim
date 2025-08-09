@@ -2,10 +2,11 @@ return {
   "stevearc/conform.nvim",
   opts = {
     formatters_by_ft = {
-      python = { "isort", "black" }, -- Сначала isort, затем black
+      python = { "isort", "black" },
       tsx = { "prettier" },
       typescript = { "prettier" },
       javascript = { "prettier" },
+      yaml = { "prettier" },
     },
     servers = {
       vtsls = {

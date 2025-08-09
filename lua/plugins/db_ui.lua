@@ -1,19 +1,40 @@
 local M = {}
 
-local ssh_tunnel_job = nil
+local ssh_tunnel_jobs = {}
 
-local function ensure_ssh_tunnel()
-  if ssh_tunnel_job then
-    local status = vim.fn.jobwait({ ssh_tunnel_job }, 0)[1]
+local function ensure_ssh_tunnel(server)
+  local tunnel_configs = {
+    leto = {
+      local_port = 15432,
+      remote_port = 5433,
+      host = "leto",
+    },
+    -- Add your new server here
+    grms = {
+      local_port = 15433,
+      remote_port = 5433,
+      host = "grms",
+    },
+  }
+
+  local config = tunnel_configs[server]
+  if not config then
+    vim.notify("No tunnel configuration for server: " .. server, vim.log.levels.ERROR)
+    return
+  end
+
+  if ssh_tunnel_jobs[server] then
+    local status = vim.fn.jobwait({ ssh_tunnel_jobs[server] }, 0)[1]
     if status == -1 then
       return
     end
   end
-  ssh_tunnel_job = vim.fn.jobstart({
+
+  ssh_tunnel_jobs[server] = vim.fn.jobstart({
     "ssh",
     "-NL",
-    "15432:localhost:5433",
-    "leto",
+    config.local_port .. ":localhost:" .. config.remote_port,
+    config.host,
   }, { detach = false })
 end
 
@@ -32,17 +53,20 @@ M.plugin = {
           end
         end
 
-        ensure_ssh_tunnel()
+        ensure_ssh_tunnel("leto")
+        ensure_ssh_tunnel("grms")
         vim.cmd("DBUIToggle")
       end,
-      desc = "Toggle DBUI with SSH tunnel",
+      desc = "Toggle DBUI with Leto SSH tunnel",
     },
   },
   config = function()
     vim.api.nvim_create_autocmd("VimLeavePre", {
       callback = function()
-        if ssh_tunnel_job then
-          vim.fn.jobstop(ssh_tunnel_job)
+        for _, job in pairs(ssh_tunnel_jobs) do
+          if job then
+            vim.fn.jobstop(job)
+          end
         end
       end,
     })
