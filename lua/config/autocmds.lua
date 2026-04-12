@@ -6,3 +6,12 @@
 --
 -- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
+
+-- dadbod-ui showing table
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "dbout", -- Match the result buffer type
+  callback = function()
+    -- vim.cmd("vertical resize 60") -- Set preferred width
+    vim.cmd("resize 25") -- Set preferred height
+  end,
+})

@@ -1,0 +1,1 @@
+/Users/bakhodir/.config/nvim/lua/plugins/db_ui.lua
