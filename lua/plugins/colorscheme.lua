@@ -1,1 +1,12 @@
-/Users/bakhodir/.config/nvim/lua/plugins/colorscheme.lua
+return {
+  -- GRUVBOX
+  { "ellisonleao/gruvbox.nvim" },
+
+  -- Configure LazyVim to load gruvbox
+  {
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = "gruvbox",
+    },
+  },
+}
