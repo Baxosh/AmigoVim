@@ -1,6 +1,22 @@
 -- since this is just an example spec, don't actually load anything here and return an empty spec
 -- stylua: ignore
-if true then return {} end
+if true then return {
+{
+    "folke/snacks.nvim",
+    opts = {
+      picker = {
+        win = {
+          input = {
+            keys = {
+              ["<a-k>"] = { "history_back", mode = { "i", "n" } },
+              ["<a-j>"] = { "history_forward", mode = { "i", "n" } },
+            },
+          },
+        },
+      },
+    },
+  }
+} end
 
 -- every spec file under the "plugins" directory will be loaded automatically by lazy.nvim
 --
