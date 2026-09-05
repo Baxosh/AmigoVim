@@ -1,15 +1,32 @@
 -- 1. Define a helper function to set the theme based on the background
+local themes = {
+  light = "github_light_colorblind",
+  dark = "github_dark_colorblind",
+}
+
+-- Guard: тема сама выставляет `background`, что с `nested = true`
+-- заново дёрнуло бы этот же OptionSet.
+local applying = false
+
 local function apply_theme()
-  if vim.o.background == "light" then
-    vim.cmd.colorscheme("github_light_colorblind")
-  else
-    vim.cmd.colorscheme("github_dark_colorblind")
+  if applying then
+    return
+  end
+  applying = true
+  local ok, err = pcall(vim.cmd.colorscheme, themes[vim.o.background] or themes.dark)
+  applying = false
+  if not ok then
+    vim.notify(tostring(err), vim.log.levels.ERROR)
   end
 end
 
 -- 2. Watch for background changes (e.g., if you run :set background=dark manually)
+-- `nested = true` обязателен: без него `:colorscheme`, вызванный изнутри
+-- автокоманды, не порождает событие ColorScheme, и bufferline / lualine
+-- остаются с цветами предыдущей темы.
 vim.api.nvim_create_autocmd("OptionSet", {
   pattern = "background",
+  nested = true,
   callback = apply_theme,
 })
 
