@@ -1,0 +1,9 @@
+{
+  "print f-string debug": {
+    "prefix": "prf",
+    "body": [
+      "print(f\"{$1 =}\")$0"
+    ],
+    "description": "Debug print of an expression with its value"
+  }
+}

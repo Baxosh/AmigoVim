@@ -4,6 +4,11 @@ local themes = {
   dark = "github_dark_colorblind",
 }
 
+local themes = {
+  light = "catppuccin-latte",
+  dark = "catppuccin-latte",
+}
+
 -- Guard: тема сама выставляет `background`, что с `nested = true`
 -- заново дёрнуло бы этот же OptionSet.
 local applying = false
