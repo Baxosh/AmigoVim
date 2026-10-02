@@ -160,9 +160,32 @@ M.plugin = {
           end
         end
 
+        -- Открыт ли DBUI в текущей вкладке
+        local dbui_open = false
+        for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+          if vim.bo[vim.api.nvim_win_get_buf(win)].filetype == "dbui" then
+            dbui_open = true
+            break
+          end
+        end
+
+        if dbui_open then
+          -- Закрываем: возвращаем прежнюю директорию
+          vim.cmd("DBUIToggle")
+          if vim.t.dbui_prev_cwd then
+            vim.cmd.tcd(vim.fn.fnameescape(vim.t.dbui_prev_cwd))
+            vim.t.dbui_prev_cwd = nil
+          end
+          return
+        end
+
         for server in pairs(tunnel_configs) do
           ensure_ssh_tunnel(server)
         end
+
+        -- Открываем: cwd вкладки -> каталог сохранённых запросов (для <leader>sG)
+        vim.t.dbui_prev_cwd = vim.fn.getcwd()
+        vim.cmd.tcd(vim.fn.fnameescape(vim.fn.expand(vim.g.db_ui_save_location)))
         vim.cmd("DBUIToggle")
       end,
       desc = "Toggle DBUI (leto/grms/cloud SSH tunnels)",
