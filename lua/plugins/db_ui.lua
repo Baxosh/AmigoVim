@@ -214,6 +214,12 @@ M.plugin = {
 
     -- Сразу выполнять хелперы таблиц (Columns, Indexes и т.д.)
     vim.g.db_ui_auto_execute_table_helpers = 1
+    vim.g.db_ui_table_helpers = {
+      postgresql = {
+        List = 'select * from "{table}"\nlimit 200;',
+        Count = "SELECT COUNT(*) FROM {table};",
+      },
+    }
   end,
 
   config = function()

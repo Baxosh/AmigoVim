@@ -5,9 +5,14 @@
 -- }
 
 local themes = {
-  light = "github_light",
+  light = "catppuccin-nvim",
   dark = "gruvbox",
 }
+
+-- local themes = {
+--   light = "tokyonight-day",
+--   dark = "tokyonight-moon",
+-- }
 
 -- Guard: тема сама выставляет `background`, что с `nested = true`
 -- заново дёрнуло бы этот же OptionSet.
