@@ -206,7 +206,8 @@ M.plugin = {
     vim.g.db_ui_env_variable_name = "DATABASE_NAME"
 
     -- Поменьше шума в сообщениях
-    vim.g.db_ui_show_notifications = 0
+    -- Уведомления через vim.notify (noice/snacks → правый верхний угол)
+    vim.g.db_ui_use_nvim_notify = 1
     vim.g.db_ui_force_echo_notifications = 0
 
     -- Не выполнять запрос автоматически при :w
