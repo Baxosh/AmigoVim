@@ -31,8 +31,9 @@ return {
     opts.formatters_by_ft.mysql = { "sqruff" }
     opts.formatters_by_ft.plsql = { "sqruff" }
     opts.formatters["sqruff"] = {
-      stdin = false,
-      args = { "fix", "--config", vim.fn.expand("~/.sqruff"), "$FILENAME" },
+      stdin = true,
+      args = { "fix", "--config", vim.fn.expand("~/.sqruff"), "-" },
+      exit_codes = { 0, 1 },
     }
     return opts
   end,

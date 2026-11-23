@@ -214,7 +214,7 @@ M.plugin = {
     vim.g.db_ui_execute_on_save = 0
 
     -- Сразу выполнять хелперы таблиц (Columns, Indexes и т.д.)
-    vim.g.db_ui_auto_execute_table_helpers = 1
+    vim.g.db_ui_auto_execute_table_helpers = 0
     vim.g.db_ui_table_helpers = {
       postgresql = {
         List = 'select * from "{table}"\nlimit 200;',
